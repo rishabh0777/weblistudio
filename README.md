@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+# Webli Studio
+
+### We Build. You Launch.
+
+Webli Studio is an independent digital studio from India, creating thoughtfully designed websites and digital experiences for ambitious businesses worldwide.
+
+We combine design, technology, and purposeful interactions to help brands build a stronger digital presence.
+
+**Website:** https://webli.vercel.app
+
+---
+
+## About
+
+Webli Studio focuses on building modern, responsive, and visually engaging digital experiences that balance aesthetics with functionality.
+
+Our approach combines thoughtful design, modern web technologies, and performance-conscious development to create websites that work across devices and screen sizes.
+
+## Services
+
+- **Website Design** — Clean, distinctive, user-focused interfaces.
+- **Web Development** — Modern, responsive websites built for real-world use.
+- **Interactive Experiences** — Thoughtful animations and motion-driven interfaces.
+- **E-commerce Websites** — Digital storefronts designed around products and customers.
+- **Business Websites** — Professional online experiences for growing businesses.
+
+## Technology
+
+Our technology stack may include:
+
+- Next.js
+- React
+- JavaScript
+- Tailwind CSS
+- GSAP
+- Modern web development tools
+
+Technology choices depend on the requirements of each project.
+
+## Project Structure
+
+```text
+client/
+├── public/
+│   ├── logoWithTextBlackBG.png
+│   ├── logoWithTextWhiteBG.png
+│   ├── primaryBlackBG.png
+│   ├── primaryWhiteBG.png
+│   └── transparent.svg
+├── src/
+│   └── app/
+│       ├── globals.css
+│       ├── layout.js
+│       └── page.js
+├── .gitignore
+├── next.config.mjs
+├── package.json
+└── README.md
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (LTS recommended)
+- npm
+- Git
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/rishabh0777/weblistudio.git
+```
+
+Navigate to the project directory:
+
+```bash
+cd weblistudio/client
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Development
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Useful commands:
 
-## Learn More
+```bash
+npm run dev
+npm run build
+npm run start
+npm run lint
+```
 
-To learn more about Next.js, take a look at the following resources:
+Run only the scripts that are defined in `package.json`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The website is intended to be deployed using Vercel.
 
-## Deploy on Vercel
+1. Import the GitHub repository into Vercel.
+2. Configure the project root directory as `client` if required by the repository structure.
+3. Configure any required environment variables.
+4. Deploy the project and verify the production build.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Live website: https://webli.vercel.app
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Brand
+
+Webli Studio follows a minimal, typography-led visual identity built around a monochrome palette, considered layouts, and purposeful interactions.
+
+The goal is simple: create digital experiences that feel distinctive, useful, and memorable.
+
+## Contact
+
+For project inquiries and collaborations, visit the website:
+
+https://webli.vercel.app
+
+---
+
+© Webli Studio. All rights reserved.
