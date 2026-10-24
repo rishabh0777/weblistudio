@@ -6,6 +6,7 @@ import {
 } from "next/font/google";
 
 import "./globals.css";
+import Header from "./components/layout/header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -151,7 +152,10 @@ export default function RootLayout({ children }) {
       `}
     >
       <body className="min-h-full flex flex-col overflow-x-hidden">
-        <main className="flex-1">{children}</main>
+        <main className="flex-1">
+
+          <Header />
+          {children}</main>
       </body>
     </html>
   );
