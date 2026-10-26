@@ -20,6 +20,7 @@ gsap.registerPlugin(useGSAP);
    ========================================================================== */
 
 const NAV_LINKS = [
+  { label: "Home", href: "/" },
   { label: "Work", href: "/work" },
   { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
@@ -208,7 +209,11 @@ export default function Header({
 
   /* Close on route change, and if the viewport grows to desktop width. */
   useEffect(() => {
-    setOpen(false);
+    const frame = window.requestAnimationFrame(() => {
+      setOpen(false);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, [pathname]);
 
   useEffect(() => {
