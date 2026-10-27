@@ -1,0 +1,403 @@
+/* ==========================================================================
+   Webli Studio — Selected Work
+   Literal fallbacks match the design tokens in globals.css (the :root --border
+   / --muted vars there are light-theme values, so they are not used here).
+   ========================================================================== */
+
+.section {
+  --work-bg: var(--color-background, #080808);
+  --work-fg: var(--color-foreground, #f5f5f5);
+  --work-muted: var(--color-muted, #929292);
+  --work-border: var(--color-border, #262626);
+  --work-surface: var(--color-surface, #111111);
+  --work-gap: 1rem;
+  --work-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  position: relative;
+  overflow-x: clip;
+  color: var(--work-fg);
+}
+
+/* Header ------------------------------------------------------------------ */
+
+.header {
+  display: grid;
+  gap: 2rem;
+}
+
+.headerMain {
+  min-width: 0;
+}
+
+.eyebrow {
+  margin: 0 0 2rem;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--work-muted);
+}
+
+.heading {
+  margin: 0;
+  font-size: clamp(2.35rem, 9vw, 3.5rem);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.line {
+  display: block;
+}
+
+.accent {
+  font-family: var(--font-instrument-serif), serif;
+  font-size: 1.08em;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.headerSide {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.intro {
+  max-width: 30rem;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--work-muted);
+  text-wrap: pretty;
+}
+
+/* Text links ------------------------------------------------------------- */
+
+.textLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--work-fg);
+}
+
+.textLink > span:first-child {
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--work-border);
+  transition: border-color 400ms var(--work-ease);
+}
+
+.textLink > span:last-child {
+  transition: transform 400ms var(--work-ease);
+}
+
+.textLink:hover > span:first-child {
+  border-color: var(--work-fg);
+}
+
+.textLink:hover > span:last-child {
+  transform: translate(2px, -2px);
+}
+
+/* Controls ---------------------------------------------------------------- */
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 3.5rem;
+  padding-bottom: 1.25rem;
+}
+
+.counter {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--work-muted);
+}
+
+.buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  font-size: 1rem;
+  color: var(--work-fg);
+  background: transparent;
+  border: 1px solid var(--work-border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    border-color 400ms var(--work-ease),
+    background-color 400ms var(--work-ease),
+    color 400ms var(--work-ease),
+    opacity 400ms var(--work-ease);
+}
+
+.control:hover:not(:disabled) {
+  background: var(--work-fg);
+  color: var(--work-bg);
+  border-color: var(--work-fg);
+}
+
+.control:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.control:focus-visible,
+.textLink:focus-visible,
+.track:focus-visible,
+.cardInner:focus-visible {
+  outline: 2px solid var(--work-fg);
+  outline-offset: 4px;
+}
+
+/* Track -------------------------------------------------------------------- */
+
+.track {
+  display: flex;
+  gap: var(--work-gap);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  flex: 0 0 84%;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.cardInner {
+  display: block;
+  color: inherit;
+}
+
+/* Media -------------------------------------------------------------------- */
+
+.media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--work-surface, #111111);
+  border: 1px solid var(--work-border, #262626);
+}
+
+.image {
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 900ms var(--work-ease);
+}
+
+.fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+  transition: transform 900ms var(--work-ease);
+}
+
+.fallbackTitle {
+  font-family: var(--font-instrument-serif), serif;
+  font-size: clamp(1.75rem, 5vw, 3rem);
+  font-style: italic;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--work-border);
+}
+
+.cardInner:hover .image,
+.cardInner:hover .fallback {
+  transform: scale(1.04);
+}
+
+.cardInner:hover .media {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Card text ---------------------------------------------------------------- */
+
+.meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--work-muted);
+}
+
+.number {
+  color: var(--work-fg);
+}
+
+.category {
+  text-align: right;
+}
+
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.arrow {
+  font-size: 1.125rem;
+  color: var(--work-muted);
+  transition:
+    transform 400ms var(--work-ease),
+    color 400ms var(--work-ease);
+}
+
+.cardInner:hover .arrow {
+  color: var(--work-fg);
+  transform: translate(2px, -2px);
+}
+
+.description {
+  max-width: 30rem;
+  margin: 0.75rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--work-muted);
+  text-wrap: pretty;
+}
+
+/* Footer ------------------------------------------------------------------- */
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 4rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--work-border);
+}
+
+.closing {
+  margin: 0;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.18em;
+  color: var(--work-muted);
+}
+
+/* Tablet ------------------------------------------------------------------- */
+
+@media (min-width: 640px) {
+  .section {
+    --work-gap: 1.25rem;
+  }
+
+  .heading {
+    font-size: clamp(2.75rem, 6vw, 4.5rem);
+  }
+
+  .card {
+    flex-basis: 66%;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .footer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/* Desktop ------------------------------------------------------------------ */
+
+@media (min-width: 1024px) {
+  .section {
+    --work-gap: 1.5rem;
+  }
+
+  .header {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    align-items: end;
+    column-gap: 4rem;
+  }
+
+  .heading {
+    font-size: clamp(3.5rem, 6.2vw, 6.5rem);
+  }
+
+  .headerSide {
+    align-items: flex-start;
+    padding-bottom: 0.5rem;
+  }
+
+  .controls {
+    margin-top: 5rem;
+  }
+
+  /* Two cards visible at a time */
+  .card {
+    flex-basis: calc((100% - var(--work-gap)) / 2);
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+}
+
+/* Reduced motion ----------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .image,
+  .fallback,
+  .arrow,
+  .media,
+  .control,
+  .textLink > span {
+    transition: none;
+  }
+
+  .cardInner:hover .image,
+  .cardInner:hover .fallback,
+  .cardInner:hover .arrow,
+  .textLink:hover > span:last-child {
+    transform: none;
+  }
+}

@@ -1,16 +1,18 @@
 import Hero from '@/app/components/landing/hero';
 import GravityField from '@/app/components/interactions/gravityField';
-import Marquee from './components/interactions/marquee';
+import ServicesOverview from './components/landing/serviceReveal/servicesOverviewReveal';
+import SelectedWork from './components/landing/selectedWork/selectedWork';
 
 export default function Home() {
   return (
     <>
     <>
-      <GravityField />
+      {/* <GravityField /> */}
 
       <main className="relative z-10">
         <Hero />
-        <Marquee />
+        <ServicesOverview />
+        <SelectedWork />
       </main>
     </>
 
