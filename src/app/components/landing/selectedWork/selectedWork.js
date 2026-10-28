@@ -20,14 +20,6 @@ const PROJECTS = [
     href: "https://www.launchhaus.in/",
   },
   {
-    title: "Rishabh Srivastava (Founder's Portfolio)",
-    category: "Portfolio · Personal Branding",
-    description: "A portfolio website for a founder and entrepreneur.",
-    image: "/works/rishabhsrivastava.png",
-    alt: "Screenshot of the Rishabh Srivastava portfolio website",
-    href: "https://rishabhsrivastava.vercel.app/",
-  },
-  {
     title: "Xvital Now",
     category: "Healthcare · Nutritition · Lifestyle",
     description: "Personalized nutrition and lifestyle recommendations for a healthier life.",
@@ -35,15 +27,24 @@ const PROJECTS = [
     alt: "Xvitalhealthcare and nutrition application project preview",
     href: "https://www.xvital.in/",
   },
-  
   {
-    title: "Spice Saga",
-    category: "Food · Website Design",
-    description: "An editorial, flavour-forward website for a food brand.",
-    image: null,
-    alt: "Spice Saga food website project preview",
-    href: null,
+    title: "Rishabh Srivastava (Founder's Portfolio)",
+    category: "Portfolio · Personal Branding",
+    description: "A portfolio website for a founder and entrepreneur.",
+    image: "/works/rishabhsrivastava.png",
+    alt: "Screenshot of the Rishabh Srivastava portfolio website",
+    href: "https://rishabhsrivastava.vercel.app/",
   },
+  
+  
+  // {
+  //   title: "Aathavan Films",
+  //   category: "Photography · Cinamatography",
+  //   description: "An elegant and visually stunning website for a photography and cinematography business.",
+  //   image: "/works/aathavanFilms.png",
+  //   alt: "Aathavan Films photography website project preview",
+  //   href: "https://aathavanfilms.vercel.app/",
+  // },
 ];
 
 const pad = (n) => String(n).padStart(2, "0");

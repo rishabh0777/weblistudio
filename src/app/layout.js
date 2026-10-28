@@ -7,6 +7,7 @@ import {
 
 import "./globals.css";
 import Header from "./components/layout/header";
+import Footer from "./components/layout/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -155,7 +156,9 @@ export default function RootLayout({ children }) {
         <main className="flex-1">
 
           <Header />
-          {children}</main>
+          {children}
+          <Footer />
+        </main>
       </body>
     </html>
   );
