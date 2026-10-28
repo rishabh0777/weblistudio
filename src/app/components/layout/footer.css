@@ -167,13 +167,28 @@
 
 .webli-footer__logo-mark {
   display: grid;
-  width: 29px;
-  height: 29px;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
   place-items: center;
   border: 1px solid var(--wf-border);
   border-radius: 50%;
-  font-size: 11px;
-  letter-spacing: -0.08em;
+  color: var(--wf-fg);
+  transition:
+    border-color 350ms var(--wf-ease),
+    color 350ms var(--wf-ease);
+}
+
+.webli-footer__logo-svg {
+  display: block;
+  width: 19px;
+  height: 19px;
+  overflow: visible;
+}
+
+.webli-footer__logo:hover .webli-footer__logo-mark {
+  border-color: var(--wf-fg);
+  color: var(--wf-muted);
 }
 
 .webli-footer__brand-copy {
