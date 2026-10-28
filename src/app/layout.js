@@ -1,4 +1,3 @@
-
 import {
   Geist,
   Geist_Mono,
@@ -37,8 +36,7 @@ export const metadata = {
   applicationName: "Webli Studio",
 
   title: {
-    default:
-      "Webli Studio | Web Design & Development Agency from India",
+    default: "Webli Studio | Web Design & Development Agency from India",
     template: "%s | Webli Studio",
   },
 
@@ -63,10 +61,6 @@ export const metadata = {
   authors: [{ name: "Webli Studio" }],
   creator: "Webli Studio",
   publisher: "Webli Studio",
-
-  alternates: {
-    canonical: "/",
-  },
 
   icons: {
     icon: [
@@ -95,8 +89,7 @@ export const metadata = {
     locale: "en_IN",
     siteName: "Webli Studio",
     url: "/",
-    title:
-      "Webli Studio | Web Design & Development Agency from India",
+    title: "Webli Studio | Web Design & Development Agency from India",
     description:
       "Custom websites, e-commerce experiences and interactive digital solutions for ambitious businesses in India and worldwide.",
     images: [
@@ -111,8 +104,7 @@ export const metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title:
-      "Webli Studio | Web Design & Development Agency from India",
+    title: "Webli Studio | Web Design & Development Agency from India",
     description:
       "Custom websites and digital experiences for ambitious businesses worldwide.",
     images: ["/og.png"],
@@ -145,20 +137,16 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en-IN"
-      className={`
-        ${geistSans.variable}
-        ${geistMono.variable}
-        ${instrumentSerif.variable}
-        h-full antialiased
-      `}
+      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col overflow-x-hidden">
-        <main className="flex-1">
+      <body className="flex min-h-full flex-col overflow-x-hidden">
+        <Header />
 
-          <Header />
+        <main id="main" className="flex-1">
           {children}
-          <Footer />
         </main>
+
+        <Footer />
       </body>
     </html>
   );

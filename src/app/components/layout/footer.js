@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import "./footer.css";
 
@@ -15,7 +16,7 @@ function ArrowIcon({ diagonal = false }) {
       aria-hidden="true"
       viewBox="0 0 24 24"
       fill="none"
-      className="webli-footer__icon"
+      className="h-3.5 w-3.5 shrink-0"
     >
       {diagonal ? (
         <path
@@ -54,90 +55,126 @@ function LogoMark({ className = "" }) {
 
 export default function Footer() {
   return (
-    <footer className="webli-footer">
-      {/* Decorative grid and grain are intentionally behind the content. */}
-      <div className="webli-footer__grid" aria-hidden="true" />
-      <div className="webli-footer__noise" aria-hidden="true" />
+    <footer
+      id="footer"
+      className="webli-footer relative isolate overflow-hidden bg-[#080808] text-[#f5f5f5]"
+    >
+      <div
+        className="webli-footer__grid pointer-events-none absolute inset-0"
+        aria-hidden="true"
+      />
 
-      <div className="webli-footer__inner">
-        <section className="webli-footer__cta" aria-labelledby="footer-cta-title">
-          <p className="webli-footer__eyebrow">
+      <div className="relative z-[1] mx-auto w-full max-w-[1600px] px-5 sm:px-[5vw]">
+        {/* Call to action */}
+        <section
+          className="border-b border-[#262626] py-[5.5rem] sm:py-[8vw] lg:py-28"
+          aria-labelledby="footer-cta-title"
+        >
+          <p className="m-0 font-mono text-[9px] font-semibold leading-[1.7] tracking-[0.22em] text-[#929292]">
             HAVE A PROJECT IN MIND?
           </p>
 
-          <h2 id="footer-cta-title" className="webli-footer__headline">
+          <h2
+            id="footer-cta-title"
+            className="mt-7 mb-0 max-w-[1100px] text-[clamp(3.2rem,9.3vw,8.6rem)] font-semibold leading-[0.86] tracking-[-0.075em] [text-wrap:balance]"
+          >
             Let&apos;s make
             <br />
-            something <em>matter.</em>
+            something <em className="webli-footer__headline-em">matter.</em>
           </h2>
 
-          <div className="webli-footer__cta-bottom">
-            <p className="webli-footer__description">
+          <div className="mt-10 flex flex-wrap items-end justify-between gap-x-12 gap-y-6 sm:mt-12">
+            <p className="m-0 max-w-[360px] text-xs leading-[1.8] text-[#929292]">
               Good ideas deserve thoughtful execution.
-              <br className="webli-footer__desktop-break" />
+              <br className="hidden sm:block" />
               Tell us what you&apos;re building.
             </p>
 
-            <Link href="/contact" className="webli-footer__contact-link">
+            <Link
+              href="/contact"
+              className="group inline-flex min-h-11 items-center justify-between gap-8 rounded-full border border-[#f5f5f5] bg-[#f5f5f5] py-1.5 pr-1.5 pl-[18px] text-[11px] font-semibold text-[#080808] no-underline transition-colors duration-300 hover:bg-transparent hover:text-[#f5f5f5]"
+            >
               <span>Start a project</span>
-              <span className="webli-footer__contact-icon">
+
+              <span className="grid h-[29px] w-[29px] shrink-0 place-items-center rounded-full bg-[#080808] text-[#f5f5f5] transition-all duration-300 group-hover:rotate-45 group-hover:bg-[#f5f5f5] group-hover:text-[#080808]">
                 <ArrowIcon diagonal />
               </span>
             </Link>
           </div>
         </section>
 
-        <div className="webli-footer__navigation">
-          <div className="webli-footer__brand">
-  <Link
-    href="/"
-    className="webli-footer__logo"
-    aria-label="Webli Studio home"
-  >
-    <span className="webli-footer__logo-mark">
-      <LogoMark className="webli-footer__logo-svg" />
-    </span>
+        {/* Brand and navigation */}
+        <div className="grid grid-cols-2 gap-x-5 gap-y-10 py-10 sm:grid-cols-[minmax(0,2fr)_minmax(100px,0.8fr)_minmax(100px,0.8fr)] sm:gap-10 sm:py-16 lg:gap-20">
+          <div className="col-span-2 sm:col-span-1">
+            <Link
+              href="/"
+              aria-label="Webli Studio home"
+              className="group inline-flex items-center gap-2.5 text-xs font-semibold text-[#f5f5f5] no-underline"
+            >
+              <span className="grid h-[42px] w-[42px] shrink-0 place-items-center rounded-full border border-[#262626] text-[#f5f5f5] transition-colors duration-300 group-hover:border-[#f5f5f5] group-hover:text-[#929292]">
+                <LogoMark className="h-[19px] w-[19px]" />
+              </span>
+              <span>Webli Studio</span>
+            </Link>
 
-    <span>Webli Studio</span>
-  </Link>
+            <p className="mt-[18px] mb-0 text-[10px] leading-[1.9] text-[#929292]">
+              Independent digital studio.
+              <br />
+              Thoughtful design. Purposeful technology.
+            </p>
+          </div>
 
-  <p className="webli-footer__brand-copy">
-    Independent digital studio.
-    <br />
-    Thoughtful design. Purposeful technology.
-  </p>
-</div>
+          <div>
+            <p className="mb-5 font-mono text-[9px] font-semibold tracking-[0.22em] text-[#929292]">
+              EXPLORE
+            </p>
 
-          <div className="webli-footer__nav-group">
-            <p className="webli-footer__label">EXPLORE</p>
-            <nav aria-label="Footer navigation">
+            <nav aria-label="Footer navigation" className="flex flex-col">
               {navigation.map((item) => (
-                <Link key={item.label} href={item.href} className="webli-footer__nav-link">
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="group mb-[13px] inline-flex w-fit items-center gap-2 text-[11px] leading-[1.5] text-[#a6a6a6] no-underline transition-colors duration-300 hover:text-[#f5f5f5]"
+                >
                   <span>{item.label}</span>
-                  <ArrowIcon diagonal />
+                  <span className="webli-footer__nav-arrow">
+                    <ArrowIcon diagonal />
+                  </span>
                 </Link>
               ))}
             </nav>
           </div>
 
-          <div className="webli-footer__nav-group">
-            <p className="webli-footer__label">CONNECT</p>
+          <div className="flex flex-col">
+            <p className="mb-5 font-mono text-[9px] font-semibold tracking-[0.22em] text-[#929292]">
+              CONNECT
+            </p>
+
             <a
               href="https://www.instagram.com/webli_studio/"
               target="_blank"
               rel="noreferrer"
-              className="webli-footer__nav-link"
+              className="group mb-[13px] inline-flex w-fit items-center gap-2 text-[11px] leading-[1.5] text-[#a6a6a6] no-underline transition-colors duration-300 hover:text-[#f5f5f5]"
             >
               <span>Instagram</span>
-              <ArrowIcon diagonal />
+              <span className="webli-footer__nav-arrow">
+                <ArrowIcon diagonal />
+              </span>
             </a>
-            <Link href="/contact" className="webli-footer__nav-link">
+
+            <Link
+              href="/contact"
+              className="group mb-[13px] inline-flex w-fit items-center gap-2 text-[11px] leading-[1.5] text-[#a6a6a6] no-underline transition-colors duration-300 hover:text-[#f5f5f5]"
+            >
               <span>Get in touch</span>
-              <ArrowIcon diagonal />
+              <span className="webli-footer__nav-arrow">
+                <ArrowIcon diagonal />
+              </span>
             </Link>
           </div>
         </div>
 
+        {/* Decorative marquee */}
         <div className="webli-footer__marquee" aria-hidden="true">
           <div className="webli-footer__marquee-track">
             <span>WEBLI STUDIO</span>
@@ -151,19 +188,25 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="webli-footer__bottom">
-          <div className="webli-footer__status">
+        {/* Footer bottom bar */}
+        <div className="grid min-h-[68px] grid-cols-2 items-center gap-4 py-5 sm:grid-cols-[1fr_auto_1fr] sm:py-0">
+          <div className="webli-footer__status col-span-2 sm:col-span-1">
             <span className="webli-footer__status-dot" />
             <span>AVAILABLE FOR SELECT PROJECTS</span>
           </div>
 
-          <span className="webli-footer__copyright">
+          <span className="text-[8px] font-medium tracking-[0.1em] text-[#777]">
             © {new Date().getFullYear()} WEBLI STUDIO
           </span>
 
-          <a href="#top" className="webli-footer__back-top">
+          <a
+            href="#top"
+            className="inline-flex items-center justify-self-end gap-2.5 whitespace-nowrap text-[8px] font-medium tracking-[0.1em] text-[#b4b4b4] no-underline transition-colors duration-300 hover:text-[#f5f5f5]"
+          >
             <span>BACK TO TOP</span>
-            <span className="webli-footer__back-top-arrow" aria-hidden="true">↑</span>
+            <span className="webli-footer__back-top-arrow" aria-hidden="true">
+              ↑
+            </span>
           </a>
         </div>
       </div>
