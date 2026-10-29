@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import "./footer.css";
+import { useEffect, useState } from "react";
 
 const navigation = [
   { label: "Home", href: "/" },
