@@ -1,3 +1,4 @@
+"use client";
 
 import Link from "next/link";
 import "./footer.css";
@@ -54,6 +55,12 @@ function LogoMark({ className = "" }) {
 }
 
 export default function Footer() {
+  const [year, setYear] = useState("");
+
+  useEffect(() => {
+    setYear(String(new Date().getFullYear()));
+  }, []);
+
   return (
     <footer
       id="footer"
@@ -196,7 +203,7 @@ export default function Footer() {
           </div>
 
           <span className="text-[8px] font-medium tracking-[0.1em] text-[#777]">
-            © {new Date().getFullYear()} WEBLI STUDIO
+            © {year} WEBLI STUDIO
           </span>
 
           <a
