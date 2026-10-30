@@ -2,6 +2,7 @@ import Hero from "@/app/components/landing/hero";
 import ServicesOverview from "./components/landing/serviceReveal/servicesOverviewReveal";
 import SelectedWork from "./components/landing/selectedWork/selectedWork";
 import AboutOverview from "./components/landing/aboutOverview/aboutOverview";
+import WaterRippleQuote from "./components/interactions/waterRippleQuote";
 
 export const metadata = {
   alternates: {
@@ -16,6 +17,7 @@ export default function Home() {
       <ServicesOverview />
       <SelectedWork />
       <AboutOverview />
+      <WaterRippleQuote />
     </>
   );
 }
