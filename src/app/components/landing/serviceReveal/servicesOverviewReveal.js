@@ -18,28 +18,44 @@ const DEFAULT_CONTENT = {
       title: "Website Design & Development",
       description:
         "Distinctive, responsive websites built around your brand, your audience, and your business goals.",
+      slug: "website-design-development",
     },
     {
       title: "E-commerce Development",
       description:
         "Thoughtfully designed online stores that make browsing, product discovery, and purchasing feel effortless.",
+      slug: "ecommerce-development",
     },
     {
       title: "Landing Pages",
       description:
         "Focused, conversion-conscious pages that communicate your value and encourage visitors to take action.",
+      slug: "landing-pages",
     },
     {
       title: "Interactive Web Experiences",
       description:
         "Purposeful interactions, refined motion, and distinctive digital experiences that make your website memorable.",
+      slug: "interactive-web-experiences",
     },
   ],
-  cta: { label: "Explore all services", href: SERVICES_HREF },
+  cta: {
+    label: "Explore all services",
+    href: SERVICES_HREF,
+  },
 };
 
 export default function ServicesOverview({ content } = {}) {
-  const c = { ...DEFAULT_CONTENT, ...content };
+  const c = {
+    ...DEFAULT_CONTENT,
+    ...content,
+    services: content?.services ?? DEFAULT_CONTENT.services,
+    cta: {
+      ...DEFAULT_CONTENT.cta,
+      ...content?.cta,
+      href: SERVICES_HREF,
+    },
+  };
 
   return (
     <section
@@ -82,12 +98,12 @@ export default function ServicesOverview({ content } = {}) {
             <ol className="border-b border-border">
               {c.services.map((service, i) => (
                 <li
-                  key={service.title}
+                  key={service.slug ?? service.title}
                   data-services="row"
                   className="border-t border-border"
                 >
                   <Link
-                    href={SERVICES_HREF}
+                    href={`${SERVICES_HREF}/${service.slug}`}
                     className="group grid min-h-12 grid-cols-[auto_1fr_auto] items-start gap-x-5 gap-y-2 py-7 md:gap-x-8 md:py-9"
                   >
                     <span
@@ -117,9 +133,12 @@ export default function ServicesOverview({ content } = {}) {
               ))}
             </ol>
 
-            <div data-services="cta" className="mt-10 md:mt-12">
+            <div
+              data-services="cta"
+              className="mt-10 md:mt-12"
+            >
               <Link
-                href={c.cta.href}
+                href={SERVICES_HREF}
                 className="group inline-flex min-h-12 items-center gap-5 rounded-full border border-foreground bg-foreground px-6 text-sm font-medium text-background transition-colors duration-300 hover:bg-transparent hover:text-foreground"
               >
                 {c.cta.label}

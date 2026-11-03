@@ -120,7 +120,7 @@ export default function Footer() {
               className="group inline-flex items-center gap-2.5 text-xs font-semibold text-[#f5f5f5] no-underline"
             >
               <span className="grid h-[42px] w-[42px] shrink-0 place-items-center rounded-full border border-[#262626] text-[#f5f5f5] transition-colors duration-300 group-hover:border-[#f5f5f5] group-hover:text-[#929292]">
-                <LogoMark className="h-[19px] w-[19px]" />
+                <LogoMark className="h-[19px] w-[19px] glowing-logo" />
               </span>
               <span>Webli Studio</span>
             </Link>

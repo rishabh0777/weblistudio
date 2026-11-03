@@ -3,6 +3,7 @@ import ServicesOverview from "./components/landing/serviceReveal/servicesOvervie
 import SelectedWork from "./components/landing/selectedWork/selectedWork";
 import AboutOverview from "./components/landing/aboutOverview/aboutOverview";
 import WaterRippleQuote from "./components/interactions/waterRippleQuote";
+import Footer from "./components/layout/footer";
 
 export const metadata = {
   alternates: {
@@ -18,6 +19,7 @@ export default function Home() {
       <SelectedWork />
       <AboutOverview />
       <WaterRippleQuote />
+      <Footer />
     </>
   );
 }
