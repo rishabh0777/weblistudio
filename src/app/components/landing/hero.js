@@ -233,7 +233,6 @@ export default function Hero({ content } = {}) {
       aria-labelledby="hero-heading"
       className="relative flex min-h-svh flex-col overflow-x-clip"
     >
-        <FluidCursor />
       {/* No-JS fallback: reveal everything if scripts are disabled. */}
       <noscript>
         <style>{`.hero-anim{opacity:1!important}`}</style>

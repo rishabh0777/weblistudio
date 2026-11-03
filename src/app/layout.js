@@ -6,6 +6,7 @@ import {
 
 import "./globals.css";
 import Header from "./components/layout/header";
+import FluidCursor from "@/app/components/interactions/fluidCursor"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -139,6 +140,8 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col overflow-x-hidden">
+                <FluidCursor />
+
         <Header />
 
         <main id="main" className="flex-1">
