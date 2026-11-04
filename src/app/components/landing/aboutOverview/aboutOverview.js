@@ -5,18 +5,21 @@ import AboutOverviewReveal from "./aboutOverviewReveal";
 const principles = [
   {
     number: "01",
+    slug: "think-beyond-the-brief",
     title: "Think beyond the brief.",
     description:
       "We understand your business, your audience, and the purpose behind every digital decision.",
   },
   {
     number: "02",
+    slug: "make-every-detail-matter",
     title: "Make every detail matter.",
     description:
       "Distinctive typography, considered layouts, and purposeful interactions give your brand its own character.",
   },
   {
     number: "03",
+    slug: "build-for-the-real-world",
     title: "Build for the real world.",
     description:
       "Responsive interfaces, accessible experiences, and performance-conscious development create a stronger online presence.",

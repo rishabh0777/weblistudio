@@ -1,5 +1,6 @@
 import Link from "next/link";
 import AboutReveal from "../components/about/aboutReveal";
+import { PRINCIPLES } from "../components/about/principles";
 
 /* ==========================================================================
    Webli Studio — About (Server Component)
@@ -7,9 +8,14 @@ import AboutReveal from "../components/about/aboutReveal";
    (AboutReveal) handles the scroll-triggered entrance, and the hero is not
    animated so the H1 is visible from first paint.
 
-   Internal links: only routes that exist are linked (/contact). /services
-   and /work are intentionally not linked yet; add descriptive links to them
-   once those pages are built.
+   Section anchors: each principle and each process stage is a section of this
+   page with its own element ID (e.g. /about#think-beyond-the-brief). These are
+   in-page links, not separate routes or indexable pages. Principle IDs come
+   from components/about/principles.js, which the home page AboutOverview also
+   uses for its links. `scroll-mt-6` adds breathing room on top of the
+   `scroll-padding-top` already set on <html>, so targets clear the header.
+
+   Internal links: only routes that exist are linked (/contact).
 
    Metadata note: Next.js replaces (does not deep-merge) `openGraph` and
    `twitter` from the root layout, so both are fully specified here, including
@@ -18,7 +24,7 @@ import AboutReveal from "../components/about/aboutReveal";
 
 const TITLE = "About Our Web Design & Development Studio";
 const DESCRIPTION =
-  "Webli Studio is an independent web design and development studio founded by Rishabh Srivastava, building landing pages, business and e-commerce websites.";
+  "Webli Studio is an independent web design and development studio founded by Rishabh Srivastava. See our principles and how we work, from first brief to launch.";
 
 export const metadata = {
   title: TITLE,
@@ -80,24 +86,39 @@ const CONTENT = {
     copy: "We design and develop landing pages, business websites, and e-commerce experiences. Every project begins with understanding the business, its audience, and the purpose of the website—then turning that into a considered design and a responsive build.",
     offerings: ["Landing pages", "Business websites", "E-commerce websites"],
   },
+  principles: {
+    label: "OUR PRINCIPLES / 001—003",
+    title: "Principles behind the work",
+    copy: "Three ideas guide how we approach every website, from the first conversation to the final interaction.",
+  },
   process: {
     label: "OUR PROCESS / 001—003",
     title: "How we work",
+    copy: "Every project moves through the same three stages, so you always know where it stands.",
     steps: [
       {
+        slug: "understand-the-project",
         title: "Understand",
         description:
           "Clarify the business, audience, goals, and project scope.",
+        detail:
+          "We start by learning about the business: what it does, who the website is for and what it needs to achieve. Then we agree the scope of the project, so the website is planned around clear goals rather than assumptions.",
       },
       {
+        slug: "design-the-experience",
         title: "Design",
         description:
           "Create a visual direction and page structure that make the brand and its message easy to understand.",
+        detail:
+          "Once the goals are clear, we shape the visual direction and plan the page structure. Typography, layout and spacing are considered together, so the brand and its message are easy to understand at a glance.",
       },
       {
+        slug: "build-and-launch",
         title: "Build",
         description:
           "Develop a responsive website, test key interactions, and prepare it for launch.",
+        detail:
+          "We develop the website from the agreed design and make sure it is responsive across screen sizes. Key interactions are tested, and the site is prepared for launch.",
       },
     ],
   },
@@ -127,8 +148,14 @@ const BODY =
 
 const SECTION = "border-t border-border py-16 md:py-24";
 
+const ITEM_TITLE =
+  "text-xl font-semibold leading-tight tracking-[-0.02em] text-foreground md:text-2xl";
+
+const ITEM_TEXT =
+  "mt-3 max-w-[32rem] text-pretty text-sm leading-relaxed text-muted md:text-base";
+
 export default function AboutPage() {
-  const { hero, founder, work, process, remote, cta } = CONTENT;
+  const { hero, founder, work, principles, process, remote, cta } = CONTENT;
 
   return (
     <AboutReveal>
@@ -234,6 +261,45 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Principles ------------------------------------------------------ */}
+      <section aria-labelledby="principles-heading" className="container-site">
+        <div className={SECTION}>
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
+            <div data-reveal className="lg:col-span-5">
+              <p className={LABEL}>{principles.label}</p>
+              <h2 id="principles-heading" className={H2}>
+                {principles.title}
+              </h2>
+              <p className={`${BODY} mt-6`}>{principles.copy}</p>
+            </div>
+
+            <ol className="border-b border-border lg:col-span-6 lg:col-start-7">
+              {PRINCIPLES.map((principle) => (
+                <li
+                  key={principle.slug}
+                  id={principle.slug}
+                  data-reveal
+                  className="grid scroll-mt-6 grid-cols-[auto_minmax(0,1fr)] items-start gap-x-5 border-t border-border py-7 md:gap-x-8 md:py-9"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="pt-1.5 font-mono text-[11px] tracking-[0.18em] text-muted md:text-xs"
+                  >
+                    {principle.number}
+                  </span>
+
+                  <div>
+                    <h3 className={ITEM_TITLE}>{principle.title}</h3>
+                    <p className={ITEM_TEXT}>{principle.description}</p>
+                    <p className={ITEM_TEXT}>{principle.detail}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
       {/* How we work ----------------------------------------------------- */}
       <section aria-labelledby="process-heading" className="container-site">
         <div className={SECTION}>
@@ -243,14 +309,16 @@ export default function AboutPage() {
               <h2 id="process-heading" className={H2}>
                 {process.title}
               </h2>
+              <p className={`${BODY} mt-6`}>{process.copy}</p>
             </div>
 
             <ol className="border-b border-border lg:col-span-6 lg:col-start-7">
               {process.steps.map((step, i) => (
                 <li
-                  key={step.title}
+                  key={step.slug}
+                  id={step.slug}
                   data-reveal
-                  className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-5 border-t border-border py-7 md:gap-x-8 md:py-9"
+                  className="grid scroll-mt-6 grid-cols-[auto_minmax(0,1fr)] items-start gap-x-5 border-t border-border py-7 md:gap-x-8 md:py-9"
                 >
                   <span
                     aria-hidden="true"
@@ -260,12 +328,9 @@ export default function AboutPage() {
                   </span>
 
                   <div>
-                    <h3 className="text-xl font-semibold leading-tight tracking-[-0.02em] text-foreground md:text-2xl">
-                      {step.title}
-                    </h3>
-                    <p className="mt-3 max-w-[32rem] text-pretty text-sm leading-relaxed text-muted md:text-base">
-                      {step.description}
-                    </p>
+                    <h3 className={ITEM_TITLE}>{step.title}</h3>
+                    <p className={ITEM_TEXT}>{step.description}</p>
+                    <p className={ITEM_TEXT}>{step.detail}</p>
                   </div>
                 </li>
               ))}
