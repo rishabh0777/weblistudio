@@ -21,7 +21,7 @@ gsap.registerPlugin(useGSAP);
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "Work", href: "/work" },
+  { label: "Works", href: "/works" },
   { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
 ];

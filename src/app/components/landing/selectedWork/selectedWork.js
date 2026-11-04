@@ -1,4 +1,4 @@
- "use client";
+"use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
@@ -6,61 +6,23 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { PROJECTS } from "@/app/components/landing/selectedWork/project";
 import "./selectedWork.css";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-const PROJECTS = [
-  {
-    title: "Launch Haus",
-    category: "Business Development  · Marketing Agency",
-    description: "A clean, modern website for a business development and marketing agency.",
-    image: "/works/launchHaus.png",
-    alt: "Screenshot of the Launch Haus website",
-    href: "https://www.launchhaus.in/",
-  },
-  {
-    title: "Xvital Now",
-    category: "Healthcare · Nutritition · Lifestyle",
-    description: "Personalized nutrition and lifestyle recommendations for a healthier life.",
-    image: "/works/xvital.png",
-    alt: "Xvitalhealthcare and nutrition application project preview",
-    href: "https://www.xvital.in/",
-  },
-  {
-    title: "Rishabh Srivastava (Founder's Portfolio)",
-    category: "Portfolio · Personal Branding",
-    description: "A portfolio website for a founder and entrepreneur.",
-    image: "/works/rishabhsrivastava.png",
-    alt: "Screenshot of the Rishabh Srivastava portfolio website",
-    href: "https://rishabhsrivastava.vercel.app/",
-  },
-  
-  
-  // {
-  //   title: "Aathavan Films",
-  //   category: "Photography · Cinamatography",
-  //   description: "An elegant and visually stunning website for a photography and cinematography business.",
-  //   image: "/works/aathavanFilms.png",
-  //   alt: "Aathavan Films photography website project preview",
-  //   href: "https://aathavanfilms.vercel.app/",
-  // },
-];
-
 const pad = (n) => String(n).padStart(2, "0");
 
-function ProjectCard({
-  project,
-  index,
-  total,
-}) {
+function ProjectCard({ project, index, total }) {
+  const isExternal = Boolean(project.href?.startsWith("http"));
+
   const content = (
     <>
       <div className="selected-work__media">
         {project.image ? (
           <Image
             src={project.image}
-            alt={project.alt}
+            alt={project.alt ?? ""}
             fill
             sizes="(min-width: 1024px) 45vw, (min-width: 640px) 66vw, 84vw"
             className="selected-work__image"
@@ -69,21 +31,32 @@ function ProjectCard({
           <div className="selected-work__fallback" aria-hidden="true">
             <span className="selected-work__fallback-index">{pad(index + 1)}</span>
             <span className="selected-work__fallback-title">{project.title}</span>
-            <span className="selected-work__fallback-caption">WEBLI STUDIO / SELECTED WORK</span>
+            <span className="selected-work__fallback-caption">
+              WEBLI STUDIO / SELECTED WORK
+            </span>
           </div>
         )}
       </div>
 
       <div className="selected-work__meta">
-        <span>{pad(index + 1)} / {pad(total)}</span>
-        <span>{project.category}</span>
+        <span>
+          {pad(index + 1)} / {pad(total)}
+        </span>
+        {project.category ? <span>{project.category}</span> : null}
       </div>
 
       <div className="selected-work__title-row">
         <h3 className="selected-work__title">{project.title}</h3>
-        <span className="selected-work__arrow" aria-hidden="true">↗</span>
+        {project.href ? (
+          <span className="selected-work__arrow" aria-hidden="true">
+            ↗
+          </span>
+        ) : null}
       </div>
-      <p className="selected-work__description">{project.description}</p>
+
+      {project.description ? (
+        <p className="selected-work__description">{project.description}</p>
+      ) : null}
     </>
   );
 
@@ -93,9 +66,13 @@ function ProjectCard({
         <Link
           href={project.href}
           className="selected-work__card-inner"
-          target={project.href.startsWith("http") ? "_blank" : undefined}
-          rel={project.href.startsWith("http") ? "noreferrer" : undefined}
-          aria-label={`View ${project.title} project`}
+          target={isExternal ? "_blank" : undefined}
+          rel={isExternal ? "noopener noreferrer" : undefined}
+          aria-label={
+            isExternal
+              ? `Visit the ${project.title} website (opens in a new tab)`
+              : `View ${project.title}`
+          }
         >
           {content}
         </Link>
@@ -230,8 +207,9 @@ export default function SelectedWork() {
 
           <div className="selected-work__header-side" data-work="intro">
             <p className="selected-work__intro">
-              A selection of digital experiences crafted with purpose, precision,
-              and an understanding of the businesses behind them.
+              A selection of web design and development projects, crafted with
+              purpose, precision, and an understanding of the businesses behind
+              them.
             </p>
             <Link href="/work" className="selected-work__text-link">
               <span>Explore all work</span>
@@ -275,7 +253,7 @@ export default function SelectedWork() {
         >
           {PROJECTS.map((project, index) => (
             <ProjectCard
-              key={project.title}
+              key={project.slug}
               project={project}
               index={index}
               total={PROJECTS.length}

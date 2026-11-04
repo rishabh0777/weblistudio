@@ -401,3 +401,34 @@
     transform: none;
   }
 }
+
+/* ==========================================================================
+   APPEND THIS BLOCK TO THE END OF selectedWork.css
+
+   Fallback tile for projects that don't have a screenshot yet. The original
+   fallback title colour (#262626) was nearly invisible on the #111 surface,
+   and its three spans sat in one row. This stacks them and makes them legible.
+   ========================================================================== */
+
+.selected-work__fallback {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.selected-work__fallback-index {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+}
+
+.selected-work__fallback-title {
+  color: var(--work-muted);
+}
+
+.selected-work__fallback-caption {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--work-border);
+}
