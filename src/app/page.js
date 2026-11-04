@@ -1,5 +1,5 @@
 import Hero from "@/app/components/landing/hero";
-import ServicesOverview from "./components/landing/serviceReveal/servicesOverviewReveal";
+import ServicesOverview from "./components/services/servicesOverviewReveal";
 import SelectedWork from "./components/landing/selectedWork/selectedWork";
 import AboutOverview from "./components/landing/aboutOverview/aboutOverview";
 import WaterRippleQuote from "./components/interactions/waterRippleQuote";
