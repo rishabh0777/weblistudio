@@ -220,7 +220,9 @@ export default function SelectedWork() {
 
         <div className="selected-work__controls">
           <span className="selected-work__counter" aria-live="polite">
-            {pad(state.active + 1)} / {pad(PROJECTS.length)}
+            {/* {pad(state.active + 1)} / {pad(PROJECTS.length)} */}
+            {/* only showing 3 projects for now, so the counter is hardcoded to 3 */}
+            {pad(state.active + 1)} / {pad(3)}
           </span>
           <div className="selected-work__buttons">
             <button
@@ -251,7 +253,16 @@ export default function SelectedWork() {
           aria-label="Selected projects, scroll horizontally"
           tabIndex={0}
         >
-          {PROJECTS.map((project, index) => (
+          {/* {PROJECTS.map((project, index) => (
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              index={index}
+              total={PROJECTS.length}
+            />
+          ))} */}
+          {/* three projects needed */}
+          {PROJECTS.slice(0, 3).map((project, index) => (
             <ProjectCard
               key={project.slug}
               project={project}
@@ -259,6 +270,7 @@ export default function SelectedWork() {
               total={PROJECTS.length}
             />
           ))}
+       
         </div>
 
         <div className="selected-work__footer" data-work="footer">

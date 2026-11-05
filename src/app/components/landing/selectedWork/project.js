@@ -1,25 +1,4 @@
-/* ==========================================================================
-   Webli Studio — Portfolio data (single source of truth)
 
-   Used by the homepage Selected Work carousel and by the /work page.
-
-   Every field except `slug` and `title` is optional, and the UI renders only
-   what is present. Only information found in the existing project files is
-   filled in. Fields that could not be verified are deliberately absent:
-
-     - Lion’s Den Cafe, Serene Stays Goa, Jerdon Villa: no URL, image,
-       category or description exists in the project files yet.
-
-   To complete one of those, add the missing fields here — nothing else in the
-   UI needs to change:
-
-     image:       "/works/<file>.png"   (file must exist in /public/works)
-     alt:         "Screenshot of the <name> website"
-     href:        "https://..."         (the live site)
-     category:    "Hospitality · Business Website"
-     description: "One factual sentence about what the site is."
-     service:     "website-design-development" (any slug from serviceDetails.js)
-   ========================================================================== */
 
 export const PROJECTS = [
   {
