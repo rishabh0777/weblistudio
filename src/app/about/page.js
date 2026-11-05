@@ -1,6 +1,6 @@
 import Link from "next/link";
 import AboutReveal from "../components/about/aboutReveal";
-import { PRINCIPLES } from "../components/about/principles";
+import { PRINCIPLES, principlePath } from "./_data";
 
 /* ==========================================================================
    Webli Studio — About (Server Component)
@@ -8,14 +8,15 @@ import { PRINCIPLES } from "../components/about/principles";
    (AboutReveal) handles the scroll-triggered entrance, and the hero is not
    animated so the H1 is visible from first paint.
 
-   Section anchors: each principle and each process stage is a section of this
-   page with its own element ID (e.g. /about#think-beyond-the-brief). These are
-   in-page links, not separate routes or indexable pages. Principle IDs come
-   from components/about/principles.js, which the home page AboutOverview also
-   uses for its links. `scroll-mt-6` adds breathing room on top of the
-   `scroll-padding-top` already set on <html>, so targets clear the header.
+   Principles: titles, descriptions and slugs come from app/about/_data.js, the
+   single source shared with the home page AboutOverview and the principle
+   detail pages. Each principle links to its own page, /about/<slug>.
 
-   Internal links: only routes that exist are linked (/contact).
+   Process stages: each stage keeps an element ID (e.g. #understand-the-project)
+   because the principle pages link to them. These are in-page anchors on
+   /about, not separate routes or indexable pages. `scroll-mt-6` adds breathing
+   room on top of the `scroll-padding-top` already set on <html>, so targets
+   clear the header.
 
    Metadata note: Next.js replaces (does not deep-merge) `openGraph` and
    `twitter` from the root layout, so both are fully specified here, including
@@ -277,9 +278,8 @@ export default function AboutPage() {
               {PRINCIPLES.map((principle) => (
                 <li
                   key={principle.slug}
-                  id={principle.slug}
                   data-reveal
-                  className="grid scroll-mt-6 grid-cols-[auto_minmax(0,1fr)] items-start gap-x-5 border-t border-border py-7 md:gap-x-8 md:py-9"
+                  className="group relative grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-5 border-t border-border py-7 md:gap-x-8 md:py-9"
                 >
                   <span
                     aria-hidden="true"
@@ -289,10 +289,29 @@ export default function AboutPage() {
                   </span>
 
                   <div>
-                    <h3 className={ITEM_TITLE}>{principle.title}</h3>
+                    <h3 className={ITEM_TITLE}>
+                      {/* The hover shift sits on an inner span: a transformed
+                          ancestor would shrink the stretched link's hit area. */}
+                      <Link
+                        href={principlePath(principle.slug)}
+                        className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:after:outline focus-visible:after:outline-2 focus-visible:after:outline-offset-4 focus-visible:after:outline-foreground"
+                      >
+                        <span className="inline-block transition-transform duration-500 ease-out group-hover:translate-x-1">
+                          {principle.title}
+                        </span>
+                        <span className="sr-only"> Read the full principle</span>
+                      </Link>
+                    </h3>
                     <p className={ITEM_TEXT}>{principle.description}</p>
                     <p className={ITEM_TEXT}>{principle.detail}</p>
                   </div>
+
+                  <span
+                    aria-hidden="true"
+                    className="pt-1 text-lg text-muted transition-[transform,color] duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground"
+                  >
+                    ↗
+                  </span>
                 </li>
               ))}
             </ol>

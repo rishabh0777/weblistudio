@@ -31,7 +31,7 @@ const DEFAULT_CONTENT = {
   description:
     "We design and develop thoughtful websites for ambitious brands — combining strategy, distinctive design, and purposeful technology.",
   primaryCta: { label: "Start a project", href: "/contact", icon: "↗" },
-  secondaryCta: { label: "Explore our work", href: "/#selected-work", icon: "↓" },
+  secondaryCta: { label: "Explore our work", href: "/works", icon: "↗" },
   detail: "DESIGN-LED. DEVELOPMENT-DRIVEN.",
 };
 

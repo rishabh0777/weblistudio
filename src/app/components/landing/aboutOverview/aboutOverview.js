@@ -1,30 +1,9 @@
-
 import Link from "next/link";
 import AboutOverviewReveal from "./aboutOverviewReveal";
+import { PRINCIPLES, principlePath } from "@/app/about/_data";
 
-const principles = [
-  {
-    number: "01",
-    slug: "think-beyond-the-brief",
-    title: "Think beyond the brief.",
-    description:
-      "We understand your business, your audience, and the purpose behind every digital decision.",
-  },
-  {
-    number: "02",
-    slug: "make-every-detail-matter",
-    title: "Make every detail matter.",
-    description:
-      "Distinctive typography, considered layouts, and purposeful interactions give your brand its own character.",
-  },
-  {
-    number: "03",
-    slug: "build-for-the-real-world",
-    title: "Build for the real world.",
-    description:
-      "Responsive interfaces, accessible experiences, and performance-conscious development create a stronger online presence.",
-  },
-];
+// Principle titles, short descriptions and slugs come from app/about/_data.js,
+// the single source shared with the /about page and the principle detail pages.
 
 // Reuse the Webli Studio SVG mark from your header.
 function WebliMark() {
@@ -185,19 +164,29 @@ export default function AboutOverview() {
 
           <div className="lg:col-span-6 lg:col-start-7">
             <ol className="border-b border-[#262626]">
-              {principles.map((principle) => (
+              {PRINCIPLES.map((principle) => (
                 <li
-                  key={principle.number}
+                  key={principle.slug}
                   data-about="principle"
-                  className="group grid grid-cols-[2rem_minmax(0,1fr)_auto] gap-4 border-t border-[#262626] py-7 md:py-9"
+                  className="group relative grid grid-cols-[2rem_minmax(0,1fr)_auto] gap-4 border-t border-[#262626] py-7 md:py-9"
                 >
                   <span className="pt-1 font-mono text-[10px] tracking-wider text-[#777]">
                     {principle.number}
                   </span>
 
                   <div>
-                    <h4 className="text-lg font-medium tracking-[-0.035em] transition-transform duration-500 ease-out group-hover:translate-x-1 md:text-2xl">
-                      {principle.title}
+                    {/* The hover shift sits on an inner span: a transformed
+                        ancestor would shrink the stretched link's hit area. */}
+                    <h4 className="text-lg font-medium tracking-[-0.035em] md:text-2xl">
+                      <Link
+                        href={principlePath(principle.slug)}
+                        className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:after:outline focus-visible:after:outline-2 focus-visible:after:outline-offset-4 focus-visible:after:outline-[#f5f5f5]"
+                      >
+                        <span className="inline-block transition-transform duration-500 ease-out group-hover:translate-x-1">
+                          {principle.title}
+                        </span>
+                        <span className="sr-only"> Read the full principle</span>
+                      </Link>
                     </h4>
 
                     <p className="mt-3 max-w-lg text-sm leading-7 text-[#929292]">
