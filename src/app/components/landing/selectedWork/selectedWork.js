@@ -211,7 +211,7 @@ export default function SelectedWork() {
               purpose, precision, and an understanding of the businesses behind
               them.
             </p>
-            <Link href="/work" className="selected-work__text-link">
+            <Link href="/works" className="selected-work__text-link">
               <span>Explore all work</span>
               <span aria-hidden="true">↗</span>
             </Link>
@@ -277,7 +277,7 @@ export default function SelectedWork() {
           <p className="selected-work__closing">
             GOOD WORK STARTS WITH A GOOD CONVERSATION.
           </p>
-          <Link href="/work" className="selected-work__text-link">
+          <Link href="/works" className="selected-work__text-link">
             <span>View all projects</span>
             <span aria-hidden="true">↗</span>
           </Link>
