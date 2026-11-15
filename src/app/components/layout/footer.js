@@ -170,6 +170,18 @@ export default function Footer() {
               </span>
             </a>
 
+            <a
+              href="https://www.linkedin.com/in/webli-studio-creative-web-development-agency-250a5336b "
+              target="_blank"
+              rel="noreferrer"
+              className="group mb-[13px] inline-flex w-fit items-center gap-2 text-[11px] leading-[1.5] text-[#a6a6a6] no-underline transition-colors duration-300 hover:text-[#f5f5f5]"
+            >
+              <span>LinkedIn</span>
+              <span className="webli-footer__nav-arrow">
+                <ArrowIcon diagonal />
+              </span>
+            </a>
+
             <Link
               href="/contact"
               className="group mb-[13px] inline-flex w-fit items-center gap-2 text-[11px] leading-[1.5] text-[#a6a6a6] no-underline transition-colors duration-300 hover:text-[#f5f5f5]"
