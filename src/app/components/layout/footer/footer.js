@@ -12,7 +12,7 @@ const navigation = [
   { label: "Contact", href: "/contact" },
 ];
 
-function ArrowIcon({ diagonal = false }) {
+function ArrowIcon() {
   return (
     <svg
       aria-hidden="true"
@@ -20,23 +20,13 @@ function ArrowIcon({ diagonal = false }) {
       fill="none"
       className="h-3.5 w-3.5 shrink-0"
     >
-      {diagonal ? (
-        <path
-          d="M7 17 17 7M7 7h10v10"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      ) : (
-        <path
-          d="M5 12h14m-6-6 6 6-6 6"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      )}
+      <path
+        d="M7 17 17 7M7 7h10v10"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
@@ -73,44 +63,6 @@ export default function Footer() {
       />
 
       <div className="relative z-[1] mx-auto w-full max-w-[1600px] px-5 sm:px-[5vw]">
-        {/* Call to action */}
-        <section
-          className="border-b border-[#262626] py-[5.5rem] sm:py-[8vw] lg:py-28"
-          aria-labelledby="footer-cta-title"
-        >
-          <p className="m-0 font-mono text-[9px] font-semibold leading-[1.7] tracking-[0.22em] text-[#929292]">
-            HAVE A PROJECT IN MIND?
-          </p>
-
-          <h2
-            id="footer-cta-title"
-            className="mt-7 mb-0 max-w-[1100px] text-[clamp(3.2rem,9.3vw,8.6rem)] font-semibold leading-[0.86] tracking-[-0.075em] [text-wrap:balance]"
-          >
-            Let&apos;s make
-            <br />
-            something <em className="webli-footer__headline-em">matter.</em>
-          </h2>
-
-          <div className="mt-10 flex flex-wrap items-end justify-between gap-x-12 gap-y-6 sm:mt-12">
-            <p className="m-0 max-w-[360px] text-xs leading-[1.8] text-[#929292]">
-              Good ideas deserve thoughtful execution.
-              <br className="hidden sm:block" />
-              Tell us what you&apos;re building.
-            </p>
-
-            <Link
-              href="/contact"
-              className="group inline-flex min-h-11 items-center justify-between gap-8 rounded-full border border-[#f5f5f5] bg-[#f5f5f5] py-1.5 pr-1.5 pl-[18px] text-[11px] font-semibold text-[#080808] no-underline transition-colors duration-300 hover:bg-transparent hover:text-[#f5f5f5]"
-            >
-              <span>Start a project</span>
-
-              <span className="grid h-[29px] w-[29px] shrink-0 place-items-center rounded-full bg-[#080808] text-[#f5f5f5] transition-all duration-300 group-hover:rotate-45 group-hover:bg-[#f5f5f5] group-hover:text-[#080808]">
-                <ArrowIcon diagonal />
-              </span>
-            </Link>
-          </div>
-        </section>
-
         {/* Brand and navigation */}
         <div className="grid grid-cols-2 gap-x-5 gap-y-10 py-10 sm:grid-cols-[minmax(0,2fr)_minmax(100px,0.8fr)_minmax(100px,0.8fr)] sm:gap-10 sm:py-16 lg:gap-20">
           <div className="col-span-2 sm:col-span-1">
@@ -146,7 +98,7 @@ export default function Footer() {
                 >
                   <span>{item.label}</span>
                   <span className="webli-footer__nav-arrow">
-                    <ArrowIcon diagonal />
+                    <ArrowIcon />
                   </span>
                 </Link>
               ))}
@@ -166,19 +118,19 @@ export default function Footer() {
             >
               <span>Instagram</span>
               <span className="webli-footer__nav-arrow">
-                <ArrowIcon diagonal />
+                <ArrowIcon />
               </span>
             </a>
 
             <a
-              href="https://www.linkedin.com/in/webli-studio-creative-web-development-agency-250a5336b "
+              href="https://www.linkedin.com/in/webli-studio-creative-web-development-agency-250a5336b"
               target="_blank"
               rel="noreferrer"
               className="group mb-[13px] inline-flex w-fit items-center gap-2 text-[11px] leading-[1.5] text-[#a6a6a6] no-underline transition-colors duration-300 hover:text-[#f5f5f5]"
             >
               <span>LinkedIn</span>
               <span className="webli-footer__nav-arrow">
-                <ArrowIcon diagonal />
+                <ArrowIcon />
               </span>
             </a>
 
@@ -188,7 +140,7 @@ export default function Footer() {
             >
               <span>Get in touch</span>
               <span className="webli-footer__nav-arrow">
-                <ArrowIcon diagonal />
+                <ArrowIcon />
               </span>
             </Link>
           </div>

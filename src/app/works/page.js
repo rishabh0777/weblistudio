@@ -3,6 +3,7 @@ import Link from "next/link";
 // Generic scroll-reveal wrapper (animates elements tagged `data-reveal`),
 // the same one the Services overview page uses.
 import Reveal from "@/app/components/about/aboutReveal";
+import PageCta from "@/app/components/layout/footer/pageCTA";
 
 import { PROJECTS, FOUNDER_PROJECT } from "@/app/components/landing/selectedWork/project";
 import { SERVICE_DETAILS, getServiceBySlug, SITE_URL } from "../services/_data";
@@ -349,35 +350,12 @@ export default function WorkPage() {
       </section>
 
       {/* CTA ------------------------------------------------------------- */}
-      <section aria-labelledby="work-cta-heading" className="container-site">
-        <div className="border-t border-border py-16 md:py-24 md:pb-32">
-          <div data-reveal className="grid gap-10 lg:grid-cols-12 lg:gap-8">
-            <div className="lg:col-span-7">
-              <h2
-                id="work-cta-heading"
-                className="text-balance text-[length:clamp(2.25rem,7vw,3.5rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-foreground md:text-[length:clamp(2.5rem,4.6vw,4.5rem)]"
-              >
-                Have a project <em className={ACCENT}>{c.cta.accent}</em>
-              </h2>
-              <p className="mt-6 max-w-[34rem] text-pretty text-base leading-relaxed text-muted md:text-lg">
-                {c.cta.copy}
-              </p>
-            </div>
-
-            <div className="lg:col-span-3 lg:col-start-10 lg:self-end">
-              <Link href={c.cta.href} className={PILL}>
-                {c.cta.label}
-                <span
-                  aria-hidden="true"
-                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                >
-                  ↗
-                </span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageCta
+        eyebrow="START A CONVERSATION"
+        title="Have a project"
+        highlightText="in mind?"
+        description="Tell us about your business and what you want your website to do. We'll help you work out the right starting point."
+      />
     </Reveal>
   );
 }

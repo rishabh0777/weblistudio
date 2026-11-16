@@ -3,23 +3,7 @@ import Link from "next/link";
 // It lives in components/about for historical reasons and is not About-specific.
 import Reveal from "../components/about/aboutReveal";
 
-/* ==========================================================================
-   Webli Studio — Services overview (Server Component)
-   All content is rendered in the initial HTML; only the thin client wrapper
-   handles the one-time scroll entrance. The hero is not animated, so the H1
-   is visible from first paint.
-
-   Structure note: this page deliberately differs from the home page's
-   ServicesOverview section (which is left untouched). The home section is a
-   teaser; this page gives each service its own row, a "best for" line, and a
-   link to its detail page. Detail content is NOT repeated here.
-
-   Detail routes below are linked as specified. They return 404 until those
-   pages are built.
-
-   Metadata note: Next.js replaces (does not deep-merge) `openGraph` and
-   `twitter` from the root layout, so both are fully specified here.
-   ========================================================================== */
+import PageCta from "../components/layout/footer/pageCTA";
 
 const TITLE = "Web Design & Development Services";
 const DESCRIPTION =
@@ -221,38 +205,12 @@ export default function ServicesPage() {
       </section>
 
       {/* Not sure? CTA --------------------------------------------------- */}
-      <section aria-labelledby="services-cta-heading" className="container-site">
-        <div className="py-16 md:py-24 md:pb-32">
-          <div data-reveal className="grid gap-10 lg:grid-cols-12 lg:gap-8">
-            <div className="lg:col-span-7">
-              <h2
-                id="services-cta-heading"
-                className="text-balance text-[length:clamp(2.25rem,7vw,3.5rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-foreground md:text-[length:clamp(2.5rem,4.6vw,4.5rem)]"
-              >
-                Not sure which service <em className={ACCENT}>{c.cta.accent}</em>
-              </h2>
-              <p className="mt-6 max-w-[34rem] text-pretty text-base leading-relaxed text-muted md:text-lg">
-                {c.cta.copy}
-              </p>
-            </div>
-
-            <div className="lg:col-span-3 lg:col-start-10 lg:self-end">
-              <Link
-                href={c.cta.href}
-                className="group inline-flex min-h-12 items-center gap-5 rounded-full border border-foreground bg-foreground px-6 text-sm font-medium text-background transition-colors duration-300 hover:bg-transparent hover:text-foreground"
-              >
-                {c.cta.label}
-                <span
-                  aria-hidden="true"
-                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                >
-                  ↗
-                </span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+     <PageCta
+        eyebrow="NEED GUIDANCE?"
+        title="Not sure which"
+        highlightText="service fits?"
+        description="Tell us about your business and what you want your website to do. We'll help you work out the right starting point."
+      />
     </Reveal>
   );
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import AboutReveal from "../components/about/aboutReveal";
+import PageCta from "../components/layout/footer/pageCTA";
 import { PRINCIPLES, principlePath } from "./_data";
 
 /* ==========================================================================
@@ -377,36 +378,12 @@ export default function AboutPage() {
       </section>
 
       {/* Closing CTA ----------------------------------------------------- */}
-      <section aria-labelledby="cta-heading" className="container-site">
-        <div className={`${SECTION} md:pb-32`}>
-          <div data-reveal className="grid gap-10 lg:grid-cols-12 lg:gap-8">
-            <div className="lg:col-span-8">
-              <h2
-                id="cta-heading"
-                className="text-balance text-[length:clamp(2.25rem,7vw,3.5rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-foreground md:text-[length:clamp(2.5rem,4.6vw,4.5rem)]"
-              >
-                {cta.title}
-              </h2>
-              <p className={`${BODY} mt-6`}>{cta.copy}</p>
-            </div>
-
-            <div className="lg:col-span-3 lg:col-start-10 lg:self-end">
-              <Link
-                href={cta.href}
-                className="group inline-flex min-h-12 items-center gap-5 rounded-full border border-foreground bg-foreground px-6 text-sm font-medium text-background transition-colors duration-300 hover:bg-transparent hover:text-foreground"
-              >
-                {cta.label}
-                <span
-                  aria-hidden="true"
-                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                >
-                  ↗
-                </span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageCta
+  eyebrow="WORK WITH US"
+  title="Let’s move your business"
+  highlightText="forward."
+  description="Tell us what you're working on and what you need your website to do."
+/>
     </AboutReveal>
   );
 }

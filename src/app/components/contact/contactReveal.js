@@ -6,18 +6,7 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP);
 
-/* ==========================================================================
-   Webli Studio — Contact reveal (client wrapper)
 
-   Mirrors the Hero's entrance model:
-   - Animated elements carry `contact-anim`, which Tailwind renders as
-     `opacity-0 motion-reduce:opacity-100` (hidden before GSAP runs, shown
-     immediately for reduced motion). The <noscript> rule reveals everything
-     when JavaScript is disabled.
-   - The H1 is deliberately NOT hidden: it is the main text on the page and
-     stays visible from first paint.
-   - GSAP animates opacity + transforms only.
-   ========================================================================== */
 
 export default function ContactReveal({ children, className }) {
   const rootRef = useRef(null);

@@ -6,6 +6,7 @@ import {
 
 import "./globals.css";
 import Header from "./components/layout/header";
+import Footer from "./components/layout/footer/footer";
 import FluidCursor from "@/app/components/interactions/fluidCursor"
 
 const geistSans = Geist({
@@ -148,6 +149,7 @@ export default function RootLayout({ children }) {
           {children}
         </main>
 
+        <Footer />
       </body>
     </html>
   );

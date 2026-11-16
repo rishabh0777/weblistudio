@@ -1,20 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { INSTAGRAM_URL, hasWhatsApp, whatsappHref } from "./contactConfig";
-
-/* ==========================================================================
-   Webli Studio — Project inquiry form (client component)
-
-   - No backend and no email API: after validation the form builds a message
-     and opens WhatsApp (wa.me) with the details prefilled. Nothing is stored.
-   - Accessible: real <label>s, one <fieldset>/<legend> per radio group,
-     aria-invalid + aria-describedby on errors, an error summary
-     (role="alert"), focus moved to the first invalid field, and focus moved
-     to the result panel after submission.
-   - Styling reuses the site tokens (border-border, text-foreground, pill
-     buttons, mono labels). The only addition is one soft red for errors.
-   ========================================================================== */
+import {
+  INSTAGRAM_URL,
+  hasWhatsApp,
+  whatsappHref,
+  WEB3FORMS_KEY,
+} from "./contactConfig";
 
 const PROJECT_TYPES = [
   "Business website",
@@ -25,7 +17,6 @@ const PROJECT_TYPES = [
   "Not sure yet",
 ];
 
-// TODO(WEBLI): adjust these ranges so they match Webli Studio's real pricing.
 const BUDGET_RANGES = [
   "Under ₹5,000",
   "₹5,000 – ₹10,000",
@@ -47,7 +38,6 @@ const FIELD_ORDER = [
   "details",
 ];
 
-// The element to focus when a field is invalid (first radio for the groups).
 const FOCUS_ID = {
   name: "cf-name",
   email: "cf-email",
@@ -69,8 +59,6 @@ const INITIAL = {
 const ANIM = "contact-anim opacity-0 motion-reduce:opacity-100";
 const ERROR_COLOR = "#f87171";
 
-/* ---- Styles (existing tokens) ------------------------------------------ */
-
 const LABEL =
   "block font-mono text-[11px] uppercase tracking-[0.18em] text-muted md:text-xs";
 
@@ -78,15 +66,13 @@ const FIELD =
   "mt-2 block w-full rounded-none border-b bg-transparent py-3 text-base text-foreground transition-colors duration-300 placeholder:text-muted/60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground";
 
 const PILL_PRIMARY =
-  "group inline-flex min-h-12 items-center gap-5 rounded-full border border-foreground bg-foreground px-6 text-sm font-medium text-[#080808] transition-colors duration-300 hover:bg-transparent hover:text-[#f5f5f5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground";
+  "group inline-flex min-h-12 items-center gap-5 rounded-full border border-foreground bg-foreground px-6 text-sm font-medium text-[#080808] transition-colors duration-300 hover:bg-transparent hover:text-[#f5f5f5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground cursor-pointer";
 
 const TEXT_ACTION =
-  "group inline-flex min-h-12 items-center gap-3 text-sm font-medium text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground";
+  "group inline-flex min-h-12 items-center gap-3 text-sm font-medium text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground cursor-pointer";
 
 const TEXT_ACTION_LABEL =
   "border-b border-border pb-0.5 transition-colors duration-300 group-hover:border-foreground";
-
-/* ---- Validation ---------------------------------------------------------- */
 
 function validateField(field, value) {
   const v = value.trim();
@@ -140,8 +126,6 @@ function buildMessage(values) {
     values.details.trim(),
   ].join("\n");
 }
-
-/* ---- Field components (module scope so inputs keep focus on re-render) --- */
 
 function FieldError({ id, children }) {
   if (!children) return null;
@@ -220,22 +204,19 @@ function ChoiceGroup({ name, legend, options, value, error, onChange }) {
   );
 }
 
-/* ---- Form ---------------------------------------------------------------- */
-
 export default function ContactForm() {
   const [values, setValues] = useState(INITIAL);
   const [errors, setErrors] = useState({});
   const [showSummary, setShowSummary] = useState(false);
-  // "idle" | "ready" (WhatsApp opened) | "fallback" (no WhatsApp number set)
   const [status, setStatus] = useState("idle");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState("");
-  const [copyState, setCopyState] = useState("idle"); // idle | copied | failed
+  const [copyState, setCopyState] = useState("idle");
 
   const panelRef = useRef(null);
   const previousStatus = useRef("idle");
   const copyTimer = useRef(null);
 
-  // Move focus to the result panel, and back to the first field on "Edit".
   useEffect(() => {
     if (status !== "idle") {
       panelRef.current?.focus();
@@ -250,11 +231,10 @@ export default function ContactForm() {
   const setField = (field, value) => {
     setValues((current) => ({ ...current, [field]: value }));
 
-    // Re-validate live only once a field has shown an error.
     if (errors[field]) {
-      const message = validateField(field, value);
+      const msg = validateField(field, value);
       const next = { ...errors };
-      if (message) next[field] = message;
+      if (msg) next[field] = msg;
       else delete next[field];
 
       setErrors(next);
@@ -268,20 +248,20 @@ export default function ContactForm() {
 
   const handleBlur = (event) => {
     const { name, value } = event.target;
-    // Don't nag about an untouched empty field when tabbing past it.
     if (!value.trim() && !errors[name]) return;
 
-    const message = validateField(name, value);
+    const msg = validateField(name, value);
     setErrors((current) => {
       const next = { ...current };
-      if (message) next[name] = message;
+      if (msg) next[name] = msg;
       else delete next[name];
       return next;
     });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  // Jab user anchor/button click karega, validation check karke Web3Forms + WhatsApp trigger hoga
+  const handleActionClick = async (e) => {
+    e.preventDefault();
 
     const found = validateAll(values);
     setErrors(found);
@@ -294,19 +274,48 @@ export default function ContactForm() {
     }
 
     setShowSummary(false);
+    setIsSubmitting(true);
 
     const text = buildMessage(values);
-    const href = whatsappHref(text);
     setMessage(text);
-    setCopyState("idle");
 
-    if (href) {
-      // Opened synchronously inside the submit handler so it isn't blocked.
-      const opened = window.open(href, "_blank");
-      if (opened) opened.opener = null;
-      setStatus("ready");
-    } else {
-      setStatus("fallback");
+    try {
+      if (WEB3FORMS_KEY) {
+        await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            subject: `New Project Inquiry from ${values.name} (${values.business})`,
+            from_name: "Webli Studio Contact",
+            name: values.name,
+            email: values.email,
+            business: values.business,
+            project_type: values.projectType,
+            budget: values.budget,
+            message: values.details,
+          }),
+        });
+      }
+
+      const href = whatsappHref(text);
+      if (href) {
+        window.location.href = href; // Yeh anchor/link ki tarah smoothly redirect karega bina pop-up block hue!
+      } else {
+        setStatus("fallback");
+      }
+    } catch (err) {
+      const href = whatsappHref(text);
+      if (href) {
+        window.location.href = href;
+      } else {
+        setStatus("fallback");
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -326,11 +335,7 @@ export default function ContactForm() {
   const errorCount = Object.keys(errors).length;
   const detailsLength = values.details.length;
 
-  /* ---- Result panel (WhatsApp opened, or fallback) ---------------------- */
-
   if (status !== "idle") {
-    const isReady = status === "ready";
-
     return (
       <div data-contact="form" className={ANIM}>
         <div
@@ -338,30 +343,17 @@ export default function ContactForm() {
           tabIndex={-1}
           className="border border-border bg-surface p-6 focus:outline-none sm:p-8"
         >
-          <p className={LABEL}>{isReady ? "Message ready" : "One more step"}</p>
+          <p className={LABEL}>One more step</p>
 
           <h3 className="mt-4 text-2xl font-semibold leading-tight tracking-[-0.02em] text-foreground md:text-3xl">
-            {isReady ? (
-              <>
-                WhatsApp should be{" "}
-                <em className="font-serif text-[1.08em] font-normal italic leading-[0.8] tracking-[-0.02em]">
-                  opening.
-                </em>
-              </>
-            ) : (
-              <>
-                Send it on{" "}
-                <em className="font-serif text-[1.08em] font-normal italic leading-[0.8] tracking-[-0.02em]">
-                  Instagram.
-                </em>
-              </>
-            )}
+            Send it on{" "}
+            <em className="font-serif text-[1.08em] font-normal italic leading-[0.8] tracking-[-0.02em]">
+              Instagram.
+            </em>
           </h3>
 
           <p className="mt-4 max-w-[32rem] text-pretty text-sm leading-relaxed text-muted md:text-base">
-            {isReady
-              ? "Your details are filled in. Press send in WhatsApp and we’ll take it from there. If nothing opened, use the button below."
-              : "We couldn’t open WhatsApp from here. Copy your message and send it to us on Instagram, and we’ll reply there."}
+            We couldn’t open WhatsApp directly. Copy your message and send it to us on Instagram.
           </p>
 
           <pre className="mt-6 max-h-64 overflow-auto whitespace-pre-wrap break-words border border-border p-4 font-mono text-xs leading-relaxed text-foreground">
@@ -369,37 +361,15 @@ export default function ContactForm() {
           </pre>
 
           <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3">
-            {isReady ? (
-              <a
-                href={whatsappHref(message)}
-                target="_blank"
-                rel="noreferrer"
-                className={PILL_PRIMARY}
-              >
-                Open WhatsApp
-                <span
-                  aria-hidden="true"
-                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                >
-                  ↗
-                </span>
-              </a>
-            ) : (
-              <a
-                href={INSTAGRAM_URL}
-                target="_blank"
-                rel="noreferrer"
-                className={PILL_PRIMARY}
-              >
-                Open Instagram
-                <span
-                  aria-hidden="true"
-                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                >
-                  ↗
-                </span>
-              </a>
-            )}
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noreferrer"
+              className={PILL_PRIMARY}
+            >
+              Open Instagram
+              <span aria-hidden="true">↗</span>
+            </a>
 
             <button type="button" onClick={copyMessage} className={TEXT_ACTION}>
               <span className={TEXT_ACTION_LABEL}>Copy message</span>
@@ -414,35 +384,21 @@ export default function ContactForm() {
             </button>
           </div>
 
-          <p
-            aria-live="polite"
-            className="mt-3 min-h-5 text-sm text-muted"
-          >
+          <p aria-live="polite" className="mt-3 min-h-5 text-sm text-muted">
             {copyState === "copied" && "Message copied to your clipboard."}
             {copyState === "failed" &&
               "We couldn’t copy automatically. Select the message above and copy it."}
           </p>
-
-          {!isReady && process.env.NODE_ENV !== "production" && (
-            <p className="mt-4 border border-dashed border-border p-3 font-mono text-[11px] uppercase leading-relaxed tracking-[0.12em] text-muted">
-              Placeholder: set WHATSAPP_NUMBER in
-              app/components/contact/contactConfig.js. Shown in development
-              only.
-            </p>
-          )}
         </div>
       </div>
     );
   }
 
-  /* ---- Form ------------------------------------------------------------- */
-
   return (
     <div data-contact="form" className={ANIM}>
-      <form noValidate onSubmit={handleSubmit} aria-label="Project inquiry">
+      <form noValidate onSubmit={(e) => e.preventDefault()} aria-label="Project inquiry">
         <p className="mb-8 text-sm leading-relaxed text-muted">
-          All fields are required. Sending opens WhatsApp with your details
-          filled in. Nothing is stored on this site.
+          All fields are required. Clicking below sends your inquiry and opens WhatsApp with your details.
         </p>
 
         {showSummary && errorCount > 0 && (
@@ -541,6 +497,7 @@ export default function ContactForm() {
             placeholder="What do you do, what do you need, and when would you like to launch?"
           />
           <p
+            aria-hidden="date"
             aria-hidden="true"
             className="mt-2 text-right font-mono text-[11px] tracking-[0.18em] text-muted"
           >
@@ -548,18 +505,20 @@ export default function ContactForm() {
           </p>
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4 cursor-pointer">
+        {/* Yahan humne <a> tag ka use kiya hai jo button ki tarah style hai aur direct navigation karega */}
+        <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
           <a
-            type="submit"
+            href="#whatsapp"
+            onClick={handleActionClick}
             className={PILL_PRIMARY}
+            style={isSubmitting ? { pointerEvents: "none", opacity: 0.6 } : undefined}
           >
-            {hasWhatsApp ? "Send via WhatsApp" : "Prepare my message"}
-            <span
-              aria-hidden="true"
-              className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            >
-              ↗
-            </span>
+            {isSubmitting
+              ? "Preparing..."
+              : hasWhatsApp
+              ? "Send via WhatsApp"
+              : "Prepare my message"}
+            <span aria-hidden="true">↗</span>
           </a>
         </div>
       </form>
