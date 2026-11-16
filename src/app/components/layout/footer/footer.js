@@ -10,6 +10,7 @@ const navigation = [
   { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
+  { label: "Privacy Policy", href: "/privacy" },
 ];
 
 function ArrowIcon() {

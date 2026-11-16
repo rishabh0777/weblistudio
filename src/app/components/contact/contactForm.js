@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import {
   INSTAGRAM_URL,
   hasWhatsApp,
@@ -36,6 +37,7 @@ const FIELD_ORDER = [
   "projectType",
   "budget",
   "details",
+  "privacyConsent",
 ];
 
 const FOCUS_ID = {
@@ -45,6 +47,7 @@ const FOCUS_ID = {
   projectType: "cf-projectType-0",
   budget: "cf-budget-0",
   details: "cf-details",
+  privacyConsent: "cf-privacy",
 };
 
 const INITIAL = {
@@ -54,6 +57,7 @@ const INITIAL = {
   projectType: "",
   budget: "",
   details: "",
+  privacyConsent: false,
 };
 
 const ANIM = "contact-anim opacity-0 motion-reduce:opacity-100";
@@ -75,29 +79,37 @@ const TEXT_ACTION_LABEL =
   "border-b border-border pb-0.5 transition-colors duration-300 group-hover:border-foreground";
 
 function validateField(field, value) {
-  const v = value.trim();
-
   switch (field) {
-    case "name":
+    case "name": {
+      const v = typeof value === "string" ? value.trim() : "";
       if (!v) return "Please enter your full name.";
       if (v.length < 2) return "That name looks too short.";
       return "";
-    case "email":
+    }
+    case "email": {
+      const v = typeof value === "string" ? value.trim() : "";
       if (!v) return "Please enter your email address.";
       if (!EMAIL_RE.test(v))
         return "Please enter a valid email address, like name@company.com.";
       return "";
-    case "business":
+    }
+    case "business": {
+      const v = typeof value === "string" ? value.trim() : "";
       return v ? "" : "Please enter your brand or business name.";
+    }
     case "projectType":
       return value ? "" : "Please choose a project type.";
     case "budget":
       return value ? "" : "Please choose a budget range.";
-    case "details":
+    case "details": {
+      const v = typeof value === "string" ? value.trim() : "";
       if (!v) return "Please tell us a little about your project.";
       if (v.length < 20)
         return "Please add a little more detail (at least 20 characters).";
       return "";
+    }
+    case "privacyConsent":
+      return value ? "" : "Please read and agree to the Privacy Policy to continue.";
     default:
       return "";
   }
@@ -213,7 +225,6 @@ export default function ContactForm() {
   const [message, setMessage] = useState("");
   const [copyState, setCopyState] = useState("idle");
 
-  // Toast state: { type: 'success' | 'error', title: string, description: string }
   const [toast, setToast] = useState(null);
 
   const panelRef = useRef(null);
@@ -260,14 +271,16 @@ export default function ContactForm() {
   };
 
   const handleChange = (event) => {
-    setField(event.target.name, event.target.value);
+    const { name, value, type, checked } = event.target;
+    setField(name, type === "checkbox" ? checked : value);
   };
 
   const handleBlur = (event) => {
-    const { name, value } = event.target;
-    if (!value.trim() && !errors[name]) return;
+    const { name, value, type, checked } = event.target;
+    const val = type === "checkbox" ? checked : value;
+    if (!val && !errors[name]) return;
 
-    const msg = validateField(name, value);
+    const msg = validateField(name, val);
     setErrors((current) => {
       const next = { ...current };
       if (msg) next[name] = msg;
@@ -289,7 +302,7 @@ export default function ContactForm() {
       triggerToast(
         "error",
         "INCOMPLETE FORM",
-        "Please fill in all required fields correctly."
+        "Please fill in all required fields and accept the privacy policy."
       );
       return;
     }
@@ -327,7 +340,6 @@ export default function ContactForm() {
         }
       }
 
-      // Success Toast: Transparent background, Green text & border
       triggerToast(
         "success",
         "INQUIRY SENT",
@@ -336,7 +348,6 @@ export default function ContactForm() {
 
       const href = whatsappHref(text);
       if (href) {
-        // Thoda pause taaki user success toast dekh sake, fir redirect
         setTimeout(() => {
           window.location.href = href;
         }, 1200);
@@ -344,7 +355,6 @@ export default function ContactForm() {
         setStatus("fallback");
       }
     } catch (err) {
-      // Error Toast: Red text & border
       triggerToast(
         "error",
         "DELIVERY FAILED",
@@ -584,6 +594,56 @@ export default function ContactForm() {
               >
                 {detailsLength} / {DETAILS_MAX}
               </p>
+            </div>
+
+            {/* Mandatory Privacy Policy Checkbox */}
+            <div className="mt-6">
+              <div className="flex items-start gap-3">
+                <div className="relative flex items-center pt-0.5">
+                  <input
+                    id="cf-privacy"
+                    type="checkbox"
+                    name="privacyConsent"
+                    checked={values.privacyConsent}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={errors.privacyConsent ? "true" : undefined}
+                    className="peer h-4 w-4 shrink-0 appearance-none rounded-[4px] border border-border bg-transparent transition-colors duration-200 checked:border-foreground checked:bg-foreground hover:border-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground cursor-pointer"
+                  />
+                  {/* Custom Checkmark Icon */}
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    className="pointer-events-none absolute left-0 top-0.5 h-4 w-4 stroke-[#080808] opacity-0 transition-opacity duration-200 peer-checked:opacity-100"
+                  >
+                    <path
+                      d="M3 7.5L5.5 10L11 4"
+                      strokeWidth="1.75"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+
+                <label
+                  htmlFor="cf-privacy"
+                  className="text-xs leading-relaxed text-muted cursor-pointer select-none"
+                >
+                  I have read and agree to the{" "}
+                  <Link
+                    href="/privacy"
+                    target="_blank"
+                    className="text-blue-500 underline decoration-[#fff] underline-offset-4 transition-colors hover:decoration-foreground"
+                  >
+                    Privacy Policy
+                  </Link>{" "}
+                  and consent to processing my details for project inquiries.
+                </label>
+              </div>
+              <FieldError id="cf-privacy-error">
+                {errors.privacyConsent}
+              </FieldError>
             </div>
 
             <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
