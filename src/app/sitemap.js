@@ -21,6 +21,7 @@ export default function sitemap() {
       path: `/services/${service.slug}`,
       priority: 0.7,
     })),
+    
   ];
 
   return pages.map(({ path, priority }) => ({

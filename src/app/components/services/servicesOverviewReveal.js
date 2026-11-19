@@ -1,11 +1,7 @@
 import Link from "next/link";
 import ServicesReveal from "./servicesReveal";
 
-/* ==========================================================================
-   Webli Studio — Services Overview (Server Component)
-   All content is rendered in the initial HTML. Only the thin client wrapper
-   (ServicesReveal) handles the scroll-triggered entrance.
-   ========================================================================== */
+
 
 const SERVICES_HREF = "/services";
 

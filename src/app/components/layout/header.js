@@ -8,16 +8,7 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP);
 
-/* ==========================================================================
-   Webli Studio — Navbar
-   - Fixed, opaque header (no scroll listeners, no layout shift). The Hero
-     already reserves more top padding than the header height (4rem mobile,
-     4.5rem desktop), so nothing is covered.
-   - One useGSAP() call: a short entrance timeline plus a paused mobile-menu
-     timeline that is played / reversed from React state.
-   - Reduced motion: entrance is skipped (the `motion-reduce:opacity-100`
-     utility shows everything) and the menu opens/closes with no movement.
-   ========================================================================== */
+
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },

@@ -7,20 +7,7 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-/* ==========================================================================
-   Webli Studio — About page reveal (client wrapper)
 
-   Same visibility model as ServicesReveal:
-   - Server-rendered content is fully visible by default. Nothing is hidden
-     in CSS, so the page reads correctly with JS disabled, if GSAP fails, and
-     for crawlers.
-   - Elements tagged `data-reveal` are hidden only by GSAP, only when motion
-     is allowed, and only for the one-time entrance (`once: true`); inline
-     styles are cleared afterwards.
-   - The hero is deliberately NOT tagged, so the H1 and intro are visible
-     from first paint.
-   - Opacity + transform only; no layout properties.
-   ========================================================================== */
 
 export default function AboutReveal({ children, className }) {
   const rootRef = useRef(null);

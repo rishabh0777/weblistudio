@@ -6,15 +6,7 @@ import {
   principlePath,
 } from "@/app/about/_data";
 
-/* ==========================================================================
-   Webli Studio — About principle detail page (Server Component)
-   All content is rendered in the initial HTML. The only client code is the
-   shared AboutReveal wrapper (one-time scroll entrance, reduced-motion aware).
-   The hero is not tagged `data-reveal`, so the H1 is visible from first paint.
 
-   Structured data: Article (no dates, ratings or other unsupported fields)
-   plus BreadcrumbList. Content comes from app/about/_data.js.
-   ========================================================================== */
 
 const CONTACT_HREF = "/contact";
 const ABOUT_HREF = "/about";

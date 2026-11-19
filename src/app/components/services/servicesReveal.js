@@ -7,19 +7,7 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-/* ==========================================================================
-   Webli Studio — Services reveal (client wrapper)
 
-   Visibility model:
-   - The server-rendered markup is fully visible by default. Nothing is hidden
-     in CSS, so the content is readable with JS disabled, if GSAP fails, or
-     for crawlers.
-   - Hiding happens only inside GSAP (gsap.from sets the start state before
-     first paint after hydration), and only when motion is allowed.
-   - One-time entrance: `once: true`, then inline styles are cleared so the
-     section stays fully visible when scrolling back up.
-   - Opacity + transform only; no layout properties.
-   ========================================================================== */
 
 export default function ServicesReveal({ children }) {
   const rootRef = useRef(null);

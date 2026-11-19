@@ -8,16 +8,6 @@ import PageCta from "@/app/components/layout/footer/pageCTA";
 import { PROJECTS, FOUNDER_PROJECT } from "@/app/components/landing/selectedWork/project";
 import { SERVICE_DETAILS, getServiceBySlug, SITE_URL } from "../services/_data";
 
-/* ==========================================================================
-   Webli Studio — Work / portfolio page (Server Component)
-   All content is rendered in the initial HTML; only the shared Reveal wrapper
-   is client code. Project data lives in
-   components/landing/selectedWork/projects.js and is shared with the homepage
-   carousel. Fields that don't exist for a project are simply not rendered.
-
-   Metadata note: Next.js replaces (does not deep-merge) `openGraph` and
-   `twitter` from the root layout, so both are fully specified here.
-   ========================================================================== */
 
 const TITLE = "Web Design & Development Portfolio";
 const DESCRIPTION =

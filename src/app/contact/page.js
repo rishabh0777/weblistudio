@@ -7,15 +7,7 @@ import {
   whatsappHref,
 } from "../components/contact/contactConfig";
 
-/* ==========================================================================
-   Webli Studio — Contact (Server Component)
-   All static content is rendered in the initial HTML. Two small client
-   components handle behaviour: ContactReveal (entrance animation) and
-   ContactForm (validation + WhatsApp hand-off).
 
-   The WhatsApp number lives in app/components/contact/contactConfig.js
-   (see the TODO(WEBLI) there; it is empty until the real number is added).
-   ========================================================================== */
 
 const primaryHref = hasWhatsApp ? whatsappHref(GENERAL_MESSAGE) : INSTAGRAM_URL;
 const primaryLabel = hasWhatsApp

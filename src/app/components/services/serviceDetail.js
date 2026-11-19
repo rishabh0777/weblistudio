@@ -7,15 +7,7 @@ import {
   getServiceBySlug,
 } from "@/app/services/_data";
 
-/* ==========================================================================
-   Webli Studio — Service detail page (Server Component)
-   All content is rendered in the initial HTML. The only client code is the
-   shared Reveal wrapper (one-time scroll entrance). The hero is not animated,
-   so the H1 is visible from first paint.
 
-   Sections are rendered only when the service defines them (`extra` is
-   optional), so each page keeps its own structure.
-   ========================================================================== */
 
 const CONTACT_HREF = "/contact";
 const SERVICES_HREF = "/services";

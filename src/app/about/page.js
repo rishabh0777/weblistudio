@@ -3,26 +3,7 @@ import AboutReveal from "../components/about/aboutReveal";
 import PageCta from "../components/layout/footer/pageCTA";
 import { PRINCIPLES, principlePath } from "./_data";
 
-/* ==========================================================================
-   Webli Studio — About (Server Component)
-   All content is rendered in the initial HTML. Only the thin client wrapper
-   (AboutReveal) handles the scroll-triggered entrance, and the hero is not
-   animated so the H1 is visible from first paint.
 
-   Principles: titles, descriptions and slugs come from app/about/_data.js, the
-   single source shared with the home page AboutOverview and the principle
-   detail pages. Each principle links to its own page, /about/<slug>.
-
-   Process stages: each stage keeps an element ID (e.g. #understand-the-project)
-   because the principle pages link to them. These are in-page anchors on
-   /about, not separate routes or indexable pages. `scroll-mt-6` adds breathing
-   room on top of the `scroll-padding-top` already set on <html>, so targets
-   clear the header.
-
-   Metadata note: Next.js replaces (does not deep-merge) `openGraph` and
-   `twitter` from the root layout, so both are fully specified here, including
-   the image, to avoid inheriting the home page's URL and title.
-   ========================================================================== */
 
 const TITLE = "About Our Web Design & Development Studio";
 const DESCRIPTION =

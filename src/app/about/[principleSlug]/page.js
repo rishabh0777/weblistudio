@@ -7,19 +7,7 @@ import {
   principlePath,
 } from "../_data";
 
-/* ==========================================================================
-   Webli Studio — About principle route: /about/[principleSlug]
 
-   Same conventions as /services/[serviceName]:
-   - Content, titles and descriptions all come from app/about/_data.js.
-   - generateStaticParams pre-builds only the known principle slugs; any other
-     slug calls notFound() and returns a 404.
-   - `params` is read inside <Suspense>, as Next.js 16 with cacheComponents
-     expects (no `dynamicParams` export, which that setting rejects).
-
-   Metadata note: Next.js replaces (does not deep-merge) `openGraph` and
-   `twitter` from the root layout, so both are fully specified here.
-   ========================================================================== */
 
 export function generateStaticParams() {
   return PRINCIPLES.map((principle) => ({ principleSlug: principle.slug }));

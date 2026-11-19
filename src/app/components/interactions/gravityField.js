@@ -3,17 +3,6 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-/* ==========================================================================
-   GravityField
-   Scroll-driven sphere field: float → drop → heart → release.
-
-   CSS expectations (not in this file):
-   .gravity-field { position: fixed; inset: 0; z-index: <below content>;
-                    pointer-events: none; }
-   .gravity-field canvas { display: block; }
-   Optionally add `transition: background-color .6s` wherever you consume
-   --gravity-bg so the stage changes blend instead of snapping.
-   ========================================================================== */
 
 const clamp = (v) => Math.max(0, Math.min(1, v));
 const smooth = (a, b, v) => {

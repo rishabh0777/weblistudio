@@ -1,14 +1,3 @@
-/* ==========================================================================
-   Webli Studio — Service detail content
-
-   One entry per service. Slugs match the links on the Services overview page
-   exactly (/services/<slug>). This file is plain data: the page template is
-   app/components/services/serviceDetail.jsx.
-
-   Content rules followed here: no prices, delivery timelines, guarantees,
-   client results, statistics, testimonials or business locations.
-   ========================================================================== */
-
 export const SITE_URL = "https://webli.vercel.app";
 
 const SCOPE_FAQ = {

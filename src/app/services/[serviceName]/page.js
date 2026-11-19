@@ -6,22 +6,7 @@ import {
   getServiceBySlug,
 } from "../_data";
 
-/* ==========================================================================
-   Webli Studio — Service detail route: /services/[serviceName]
 
-   Static segments win over dynamic ones in the App Router, so any service
-   page that already exists as its own folder (for example
-   app/services/landing-pages/page.jsx) keeps being served and is never
-   overwritten. This route fills in only the slugs that don't have a page.
-
-   Only the six known slugs are generated; anything else returns a 404.
-
-   Metadata note: Next.js replaces (does not deep-merge) `openGraph` and
-   `twitter` from the root layout, so both are fully specified here, matching
-   the Services overview page.
-   ========================================================================== */
-
-// export const dynamicParams = false;
 
 export function generateStaticParams() {
   return SERVICE_DETAILS.map((service) => ({ serviceName: service.slug }));

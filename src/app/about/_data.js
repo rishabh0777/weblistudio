@@ -1,19 +1,4 @@
-/* ==========================================================================
-   Webli Studio — About principles (single source of truth)
 
-   Used by:
-   - the home page AboutOverview (title + short `description`, links to the
-     principle's own page)
-   - the /about page (title + `description` + `detail`, links to the same page)
-   - the /about/[principleSlug] detail pages (everything below)
-
-   Slugs are stable, unique, lowercase and hyphen-separated. Each one is a real
-   route: /about/<slug>.
-
-   Content rules: no client results, testimonials, statistics, awards or
-   guarantees. Statements about how Webli Studio works are limited to the
-   documented three-stage process on /about (Understand, Design, Build).
-   ========================================================================== */
 
 export const SITE_URL = "https://webli.vercel.app";
 

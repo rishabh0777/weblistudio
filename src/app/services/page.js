@@ -1,6 +1,5 @@
 import Link from "next/link";
-// Generic scroll-reveal wrapper (animates elements tagged `data-reveal`).
-// It lives in components/about for historical reasons and is not About-specific.
+
 import Reveal from "../components/about/aboutReveal";
 
 import PageCta from "../components/layout/footer/pageCTA";

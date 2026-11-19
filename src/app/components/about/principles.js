@@ -1,16 +1,4 @@
-/* ==========================================================================
-   Webli Studio — Principles (single source of truth)
-
-   Used by the home page AboutOverview (title + concise `description`, each row
-   links to /about#<slug>) and by the About page (title + `description` +
-   expanded `detail`, each rendered as a section with id="<slug>").
-
-   Slugs are stable, unique, lowercase and hyphen-separated. They are element
-   IDs on /about, not separate routes. Do not rename them without updating any
-   links that point to them.
-   ========================================================================== */
-
-export const PRINCIPLES = [
+ const PRINCIPLES = [
   {
     number: "01",
     slug: "think-beyond-the-brief",
