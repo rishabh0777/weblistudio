@@ -27,13 +27,13 @@ export const metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: {
-    canonical: "/work",
+    canonical: "/works",
   },
   openGraph: {
     type: "website",
     locale: "en_IN",
     siteName: "Webli Studio",
-    url: "/work",
+    url: "/works",
     title: `${TITLE} | Webli Studio`,
     description: DESCRIPTION,
     images: [
