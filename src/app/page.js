@@ -10,6 +10,12 @@ export const metadata = {
     canonical: "/",
   },
 };
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Webli Studio",
+  url: "https://webli.vercel.app",
+};
 
 export default function Home() {
   return (
